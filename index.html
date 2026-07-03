@@ -13,16 +13,25 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background-image: url(img/image7.jpeg); background-size: cover; background-position: center; background-repeat: no-repeat;
             display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 1000;
+            /* Cambiado para alinear los elementos de arriba a abajo de manera distribuida */
+            justify-content: space-between; align-items: center; z-index: 1000;
             transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+            /* Añadido un espacio interno para que el texto no toque el borde del celular */
+            box-sizing: border-box; padding: 40px 20px 60px 20px;
         }
         .abrir-sobre { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
-        .titulo-sobre { font-size: 3.5rem; margin-bottom: 10px; font-family: 'Bodoni', serif; }
+        
+        /* Contenedor opcional para agrupar los textos arriba sin que toquen el centro */
+        .textos-superiores { width: 100%; }
+
+        .titulo-sobre { font-size: 3.5rem; margin: 0 0 5px 0; font-family: 'Bodoni', serif; }
         .boton-lacre {
             width: 130px; height: 130px; background-color: #111111; border-radius: 50%;
             border: 3px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.3); color: white;
             font-weight: bold; cursor: pointer; display: flex; justify-content: center;
             align-items: center; font-size: 0.9rem; line-height: 1.3; transition: transform 0.3s;
+            /* Margen superior para asegurar que se mantenga despegado de la cara */
+            margin-top: auto; 
         }
         .boton-lacre:hover { transform: scale(1.1); }
         #contenido-invitacion { padding: 40px 20px; max-width: 600px; margin: 0 auto; }
@@ -52,8 +61,12 @@
     <audio id="musica-fiesta" src="musica/Gustavo Cerati - Vivo (Official Audio) - Gustavo Cerati (128k).mp3" loop></audio>
 
     <div id="pantalla-sobre">
-        <h1 class="titulo-sobre">Naiara</h1> ; 
-        <p style="font-size: 1.1rem; color: blue; font-family: sans-serif; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">Mis XV</p>
+        <!-- Envolvemos los textos en un contenedor para controlarlos mejor arriba -->
+        <div class="textos-superiores">
+            <h1 class="titulo-sobre">Naiara</h1>
+            <p style="font-size: 1.1rem; color: blue; font-family: sans-serif; letter-spacing: 2px; text-transform: uppercase; margin: 0;">Mis XV</p>
+        </div>
+        
         <button class="boton-lacre" onclick="comenzarInvitacion()"> 
             Haz clic aquí<br>para abrir<br> la invitación
         </button>
@@ -88,8 +101,7 @@
 
         <div class="seccion">
             <h2>👗 Código de Vestimenta</h2>
-            <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;">Semiformal.</p> <br> El color Celeste esta reservado 
-        
+            <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;">Semiformal.</p> <br> El color Celeste esta reservado para la quinceañera 
         </div>
 
         <div class="seccion">
@@ -104,15 +116,13 @@
         </div>
 
         <div class="seccion">
-<!-- Confirmación con Botón a Google Forms -->
-<div class="seccion">
-    <h2>💌 Confirmación de Asistencia a <br> +598 092 567 708</h2> <br> Antes del 1ro de agosto 
-</div>
-
+            <div class="seccion">
+                <h2>💌 Confirmación de Asistencia a <br> +598 092 567 708</h2> <br> Antes del 1ro de agosto 
+            </div>
         </div>
 
         <div style="margin-top: 60px; margin-bottom: 40px;">
-            <p style="font-size: 1.2rem; line-height: 1.6;">Gracias por acompañarme en este día<br>tan especial.</p>
+            <p style="font-size: 1.2rem; line-height: 1.6;">Gracias por acompañarme en este día<br>tan Fantastico.</p>
             <div class="firma-final">Naiara</div>
         </div>
     </div>
@@ -125,11 +135,12 @@
         }
 
         function copiarCuenta() {
-            navigator.clipboard.writeText("21195474");
+            var nro = document.getElementById("nro-cuenta").innerText.replace("N.º ", "");
+            navigator.clipboard.writeText(nro);
             alert("¡Número de cuenta copiado!");
         }
 
-        var fechaFiesta = new Date("Aug 15, 2026 21:29:67").getTime();
+        var fechaFiesta = new Date("Aug 15, 2026 21:29:00").getTime();
         var x = setInterval(function() {
             var ahora = new Date().getTime();
             var status = fechaFiesta - ahora;
@@ -139,7 +150,7 @@
 
             document.getElementById("dias").innerHTML = dias + " <span>Días</span>";
             document.getElementById("horas").innerHTML = horas + " <span>Horas</span>";
-            document.getElementById("minutos").innerHTML = minutos + " <span>Min</span>";
+            document.getElementById("minutos").innerHTML = minutes + " <span>Min</span>";
 
             if (status < 0) {
                 clearInterval(x);
