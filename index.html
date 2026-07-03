@@ -150,7 +150,8 @@
 
             document.getElementById("dias").innerHTML = dias + " <span>Días</span>";
             document.getElementById("horas").innerHTML = horas + " <span>Horas</span>";
-            document.getElementById("minutos").innerHTML = minutes + " <span>Min</span>";
+            // Corregido "minutes" por "minutos" aquí abajo para que no se congele:
+            document.getElementById("minutos").innerHTML = minutos + " <span>Min</span>";
 
             if (status < 0) {
                 clearInterval(x);
